@@ -1,16 +1,19 @@
-import {
-  useEffect,
-  useRef,
-  useState,
-  useCallback,
-} from 'react';
-
 import { useField } from '@unform/core';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { IconType } from 'react-icons';
 
 import { Container } from './styles';
 
-const Input = ({ name, icon: Icon, ...rest }) => {
-  const inputRef = useRef(null);
+interface Props {
+  name: string;
+  label?: string;
+  icon?: IconType;
+}
+
+type InputProps = JSX.IntrinsicElements['input'] & Props
+
+export function Input({ name, icon: Icon, ...rest }: InputProps) {
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
@@ -47,7 +50,5 @@ const Input = ({ name, icon: Icon, ...rest }) => {
         {...rest}
       />
     </Container>
-  );
-};
-
-export default Input;
+    )
+}
